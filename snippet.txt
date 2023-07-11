@@ -1,0 +1,18 @@
+<model-viewer src="piston2.glb" ar ar-modes="webxr scene-viewer quick-look" camera-controls poster="poster.webp" shadow-intensity="1" camera-orbit="68.03deg 95.56deg 823.6m" field-of-view="30deg" min-camera-orbit="auto auto 823.6m" min-field-of-view="30deg" environment-image="aircraft_workshop_01_1k.hdr" auto-rotate skybox-image="aircraft_workshop_01_1k.hdr">
+    <button class="Hotspot" slot="hotspot-4" data-position="-205.34527717489257m 138.4358464068284m -145.1944471087194m" data-normal="-0.4265298385675991m -0.0394474574115666m -0.9036128567673551m" data-visibility-attribute="visible">
+        <div class="HotspotAnnotation">Piston Head</div>
+    </button><button class="Hotspot" slot="hotspot-5" data-position="-132.94076277131617m 57.16320566354851m -63.098256497327355m" data-normal="0.30142750344785085m 0.47978324476473516m -0.8239839186587432m" data-visibility-attribute="visible">
+        <div class="HotspotAnnotation">Piston Branch</div>
+    </button><button class="Hotspot" slot="hotspot-6" data-position="-1.1276957041000344m 12.620201130562457m 0.16663619686595155m" data-normal="0.9209734798750229m 0.07725242590328633m 0.3818899213895912m" data-visibility-attribute="visible">
+        <div class="HotspotAnnotation">Piston Bottom</div>
+    </button>
+    <div class="progress-bar hide" slot="progress-bar">
+        <div class="update-bar"></div>
+    </div>
+    <button slot="ar-button" id="ar-button">
+        View in your space
+    </button>
+    <div id="ar-prompt">
+        <img src="https://modelviewer.dev/shared-assets/icons/hand.png">
+    </div>
+</model-viewer>

@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>&lt;model-viewer&gt; template</title>
+  <meta charset="utf-8">
+  <meta name="description" content="&lt;model-viewer&gt; template">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link type="text/css" href="./styles.css" rel="stylesheet" />
+</head>
+
+<body>
+  <button onclick="window.location.reload()">Reset</button>
+  <button id="move_head">move head</button>
+  <button id="move_head1">move 1</button>
+  <button id="move_head2">move 2</button>
+  <button id="move_head3">move 3</button>
+  <button id="export">Disassambel</button>
+
+  <!-- <model-viewer> HTML element -->
+  <model-viewer interpolation-decay="200" id="orbit-demo" src="piston2.glb" autoplay ar
+    ar-modes="webxr scene-viewer quick-look" camera-controls poster="poster.webp" shadow-intensity="1"
+    camera-orbit="68.03deg 95.56deg 823.6m" field-of-view="30deg" min-camera-orbit="auto auto 823.6m"
+    min-field-of-view="30deg" environment-image="aircraft_workshop_01_1k.hdr" auto-rotate skybox-image="igetit.png">
+    <button class="Hotspot" slot="hotspot-4" id="hotspot1"
+      data-position="-205.34527717489257m 138.4358464068284m -145.1944471087194m"
+      data-normal="-0.01m -0.0394474574115666m -0.0936128567673551m" data-visibility-attribute="visible">
+      X
+    </button>
+
+    <button class="Hotspot" slot="hotspot-5" id="hotspot2"
+      data-position="-132.94076277131617m 57.16320566354851m -63.098256497327355m"
+      data-normal="0.30142750344785085m 0.47978324476473516m -0.8239839186587432m" data-visibility-attribute="visible">
+      <div class="HotspotAnnotation">Connecting Rod</div>
+    </button>
+
+    <button class="Hotspot" slot="hotspot-6" id="hotspot3"
+      data-position="-1.1276957041000344m 12.620201130562457m 0.16663619686595155m"
+      data-normal="0.9209734798750229m 0.07725242590328633m 0.3818899213895912m" data-visibility-attribute="visible">
+      <div class="HotspotAnnotation">Crank Shaft</div>
+    </button>
+
+    <div class="progress-bar hide" slot="progress-bar">
+      <div class="update-bar"></div>
+    </div>
+    <button slot="ar-button" id="ar-button">
+      View in your space
+    </button>
+    <div id="ar-prompt">
+      <img src="ar_hand_prompt.png">
+    </div>
+  </model-viewer>
+  <script src="script.js"></script>
+  <script>
+    // (() => {
+    //   const modelViewer = document.querySelector('#orbit-demo');
+    //   const orbitCycle = [
+    //     '45deg 55deg 4m',
+    //     '-60deg 110deg 2m',
+    //     modelViewer.cameraOrbit
+    //   ];
+
+    //   setInterval(() => {
+    //     const currentOrbitIndex = orbitCycle.indexOf(modelViewer.cameraOrbit);
+    //     modelViewer.cameraOrbit =
+    //       orbitCycle[(currentOrbitIndex + 1) % orbitCycle.length];
+    //   }, 3000);
+    // })();
+
+    const hotspotElement1 = document.getElementById('hotspot1');
+    const hotspotElement2 = document.getElementById('hotspot2');
+    const hotspotElement3 = document.getElementById('hotspot3');
+    const move_btn = document.getElementById('move_head');
+    const move_btn1 = document.getElementById('move_head1');
+    const move_btn2 = document.getElementById('move_head2');
+    const move_btn3 = document.getElementById('move_head3');
+    const export_btn = document.getElementById('export');
+
+    hotspotElement1.addEventListener('click', function () {
+      hotspotElement2.style.display = "none"
+      hotspotElement3.style.display = "none"
+      const modelViewers = document.querySelector('#orbit-demo');
+      // Example: Disassembling a part by hiding it
+      const mv = document.querySelector("#orbit-demo");
+      const sceneSym = Object.getOwnPropertySymbols(mv).find(x => x.description === "scene");
+      console.log(mv[sceneSym].children[0].children[3].children[0].children[0]);
+      // mv[sceneSym].children[0].children[2].children[0].getObjectByName('motor_assembly_COMPLETE_1').visible = false;
+      mv[sceneSym].children[0].children[3].children[0].getObjectByName('motor_assembly_COMPLETE_2').visible = false;
+      mv[sceneSym].children[0].children[3].children[0].getObjectByName('motor_assembly_COMPLETE_3').visible = false;
+      mv[sceneSym].children[0].children[3].children[0].getObjectByName('motor_assembly_COMPLETE_4').visible = false;
+      mv[sceneSym].children[0].children[3].children[0].getObjectByName('motor_assembly_COMPLETE_5').visible = false;
+      mv[sceneSym].children[0].children[3].children[0].getObjectByName('motor_assembly_COMPLETE_6').visible = false;
+
+      const orbitCycle = [
+        '120deg 50deg 4m',
+        modelViewers.cameraOrbit
+      ];
+      const currentOrbitIndex = orbitCycle.indexOf(modelViewers.cameraOrbit);
+      modelViewers.cameraOrbit =
+        orbitCycle[(currentOrbitIndex + 1) % orbitCycle.length];
+      // Play the music
+      const audio = new Audio('./speech.mp3');
+      audio.play();
+    });
+
+    hotspotElement2.addEventListener('click', function () {
+      hotspotElement1.style.display = "none"
+      hotspotElement3.style.display = "none"
+
+      const modelViewers = document.querySelector('#orbit-demo');
+
+      // Example: Disassembling a part by hiding it
+      const mv = document.querySelector("#orbit-demo");
+      const sceneSym = Object.getOwnPropertySymbols(mv).find(x => x.description === "scene");
+      console.log(mv[sceneSym].children[0].children[3].children[0].children[0]);
+      mv[sceneSym].children[0].children[3].children[0].getObjectByName('motor_assembly_COMPLETE_1').visible = false;
+      mv[sceneSym].children[0].children[3].children[0].getObjectByName('motor_assembly_COMPLETE_2').visible = false;
+      mv[sceneSym].children[0].children[3].children[0].getObjectByName('motor_assembly_COMPLETE_3').visible = false;
+      mv[sceneSym].children[0].children[3].children[0].getObjectByName('motor_assembly_COMPLETE_4').visible = false;
+      // mv[sceneSym].children[0].children[3].children[0].getObjectByName('motor_assembly_COMPLETE_5').visible = false;
+      mv[sceneSym].children[0].children[3].children[0].getObjectByName('motor_assembly_COMPLETE_6').visible = false;
+      const orbitCycle = [
+        '-70deg 155deg 2m',
+        modelViewers.cameraOrbit
+      ];
+      const currentOrbitIndex = orbitCycle.indexOf(modelViewers.cameraOrbit);
+      modelViewers.cameraOrbit =
+        orbitCycle[(currentOrbitIndex + 1) % orbitCycle.length];
+      // Play the music
+      const audio = new Audio('./speech.mp3');
+      audio.play();
+    });
+
+    hotspotElement3.addEventListener('click', function () {
+      hotspotElement1.style.display = "none"
+      hotspotElement2.style.display = "none"
+
+      const modelViewers = document.querySelector('#orbit-demo');
+
+      // Example: Disassembling a part by hiding it
+      const mv = document.querySelector("#orbit-demo");
+      const sceneSym = Object.getOwnPropertySymbols(mv).find(x => x.description === "scene");
+      console.log(mv[sceneSym].children[0].children[3].children[0].children[0]);
+      mv[sceneSym].children[0].children[3].children[0].getObjectByName('motor_assembly_COMPLETE_1').visible = false;
+      mv[sceneSym].children[0].children[3].children[0].getObjectByName('motor_assembly_COMPLETE_2').visible = false;
+      mv[sceneSym].children[0].children[3].children[0].getObjectByName('motor_assembly_COMPLETE_3').visible = false;
+      mv[sceneSym].children[0].children[3].children[0].getObjectByName('motor_assembly_COMPLETE_4').visible = false;
+      mv[sceneSym].children[0].children[3].children[0].getObjectByName('motor_assembly_COMPLETE_5').visible = false;
+      // mv[sceneSym].children[0].children[3].children[0].getObjectByName('motor_assembly_COMPLETE_6').visible = false;
+
+      const orbitCycle = [
+        '-60deg 160deg 2m',
+        modelViewers.cameraOrbit
+      ];
+      const currentOrbitIndex = orbitCycle.indexOf(modelViewers.cameraOrbit);
+      modelViewers.cameraOrbit =
+        orbitCycle[(currentOrbitIndex + 1) % orbitCycle.length];
+      // Play the music
+      const audio = new Audio('./speech.mp3');
+      audio.play();
+    });
+
+    //move_btn 
+
+    move_btn.addEventListener('click', function () {
+
+      hotspotElement1.style.display = "none"
+
+
+      const modelViewers = document.querySelector('#orbit-demo');
+
+      // Example: Disassembling a part by hiding it
+      const mv = document.querySelector("#orbit-demo");
+      const sceneSym = Object.getOwnPropertySymbols(mv).find(x => x.description === "scene");
+      console.log(mv[sceneSym].children[0].children[3].children[0].children[0]);
+      mv[sceneSym].children[0].children[3].children[0].getObjectByName('motor_assembly_COMPLETE_1').visible = false;
+      // mv[sceneSym].children[0].children[3].children[0].getObjectByName('motor_assembly_COMPLETE_2').visible = false;
+      // mv[sceneSym].children[0].children[3].children[0].getObjectByName('motor_assembly_COMPLETE_3').visible = false;
+      // mv[sceneSym].children[0].children[3].children[0].getObjectByName('motor_assembly_COMPLETE_4').visible = false;
+      // mv[sceneSym].children[0].children[3].children[0].getObjectByName('motor_assembly_COMPLETE_5').visible = false;
+      // mv[sceneSym].children[0].children[3].children[0].getObjectByName('motor_assembly_COMPLETE_6').visible = false;
+
+      const orbitCycle = [
+        '90deg 70deg 2m',
+        modelViewers.cameraOrbit
+      ];
+      const currentOrbitIndex = orbitCycle.indexOf(modelViewers.cameraOrbit);
+      modelViewers.cameraOrbit =
+        orbitCycle[(currentOrbitIndex + 1) % orbitCycle.length];
+      // Play the music
+      const audio = new Audio('./speech.mp3');
+      audio.play();
+    });
+
+    move_btn1.addEventListener('click', function () {
+      hotspotElement1.style.display = "none"
+      hotspotElement2.style.display = "none"
+      hotspotElement3.style.display = "none"
+
+
+      const modelViewers = document.querySelector('#orbit-demo');
+
+      // Example: Disassembling a part by hiding it
+      const mv = document.querySelector("#orbit-demo");
+      const sceneSym = Object.getOwnPropertySymbols(mv).find(x => x.description === "scene");
+      console.log(mv[sceneSym].children[0].children[3].children[0].children[0]);
+      mv[sceneSym].children[0].children[3].children[0].getObjectByName('motor_assembly_COMPLETE_1').visible = false;
+      // mv[sceneSym].children[0].children[3].children[0].getObjectByName('motor_assembly_COMPLETE_2').visible = false;
+      mv[sceneSym].children[0].children[3].children[0].getObjectByName('motor_assembly_COMPLETE_3').visible = false;
+      mv[sceneSym].children[0].children[3].children[0].getObjectByName('motor_assembly_COMPLETE_4').visible = false;
+      mv[sceneSym].children[0].children[3].children[0].getObjectByName('motor_assembly_COMPLETE_5').visible = false;
+      mv[sceneSym].children[0].children[3].children[0].getObjectByName('motor_assembly_COMPLETE_6').visible = false;
+
+      const orbitCycle = [
+        '90deg 70deg 2m',
+        modelViewers.cameraOrbit
+      ];
+      const currentOrbitIndex = orbitCycle.indexOf(modelViewers.cameraOrbit);
+      modelViewers.cameraOrbit =
+        orbitCycle[(currentOrbitIndex + 1) % orbitCycle.length];
+      // Play the music
+      const audio = new Audio('./speech.mp3');
+      audio.play();
+    });
+
+    move_btn2.addEventListener('click', function () {
+      hotspotElement1.style.display = "none"
+      hotspotElement2.style.display = "none"
+      hotspotElement3.style.display = "none"
+
+      const modelViewers = document.querySelector('#orbit-demo');
+
+      // Example: Disassembling a part by hiding it
+      const mv = document.querySelector("#orbit-demo");
+      const sceneSym = Object.getOwnPropertySymbols(mv).find(x => x.description === "scene");
+      console.log(mv[sceneSym].children[0].children[3].children[0].children[0]);
+      mv[sceneSym].children[0].children[3].children[0].getObjectByName('motor_assembly_COMPLETE_1').visible = false;
+      mv[sceneSym].children[0].children[3].children[0].getObjectByName('motor_assembly_COMPLETE_2').visible = false;
+      // mv[sceneSym].children[0].children[3].children[0].getObjectByName('motor_assembly_COMPLETE_3').visible = false;
+      mv[sceneSym].children[0].children[3].children[0].getObjectByName('motor_assembly_COMPLETE_4').visible = false;
+      mv[sceneSym].children[0].children[3].children[0].getObjectByName('motor_assembly_COMPLETE_5').visible = false;
+      mv[sceneSym].children[0].children[3].children[0].getObjectByName('motor_assembly_COMPLETE_6').visible = false;
+
+      const orbitCycle = [
+        '90deg 70deg 2m',
+        modelViewers.cameraOrbit
+      ];
+      const currentOrbitIndex = orbitCycle.indexOf(modelViewers.cameraOrbit);
+      modelViewers.cameraOrbit =
+        orbitCycle[(currentOrbitIndex + 1) % orbitCycle.length];
+      // Play the music
+      const audio = new Audio('./speech.mp3');
+      audio.play();
+    });
+
+    move_btn3.addEventListener('click', function () {
+      hotspotElement1.style.display = "none"
+      hotspotElement2.style.display = "none"
+      hotspotElement3.style.display = "none"
+
+      const modelViewers = document.querySelector('#orbit-demo');
+
+      // Example: Disassembling a part by hiding it
+      const mv = document.querySelector("#orbit-demo");
+      const sceneSym = Object.getOwnPropertySymbols(mv).find(x => x.description === "scene");
+      console.log(mv[sceneSym].children[0].children[3].children[0].children[0]);
+      mv[sceneSym].children[0].children[3].children[0].getObjectByName('motor_assembly_COMPLETE_1').visible = false;
+      mv[sceneSym].children[0].children[3].children[0].getObjectByName('motor_assembly_COMPLETE_2').visible = false;
+      mv[sceneSym].children[0].children[3].children[0].getObjectByName('motor_assembly_COMPLETE_3').visible = false;
+      // mv[sceneSym].children[0].children[3].children[0].getObjectByName('motor_assembly_COMPLETE_4').visible = false;
+      mv[sceneSym].children[0].children[3].children[0].getObjectByName('motor_assembly_COMPLETE_5').visible = false;
+      mv[sceneSym].children[0].children[3].children[0].getObjectByName('motor_assembly_COMPLETE_6').visible = false;
+
+      const orbitCycle = [
+        '90deg 70deg 2m',
+        modelViewers.cameraOrbit
+      ];
+      const currentOrbitIndex = orbitCycle.indexOf(modelViewers.cameraOrbit);
+      modelViewers.cameraOrbit =
+        orbitCycle[(currentOrbitIndex + 1) % orbitCycle.length];
+      // Play the music
+      const audio = new Audio('./speech.mp3');
+      audio.play();
+    });
+
+    export_btn.addEventListener('click', function () {
+      hotspotElement1.style.display = "none"
+      hotspotElement2.style.display = "none"
+      hotspotElement3.style.display = "none"
+      const modelViewers = document.querySelector('#orbit-demo');
+      const initialPos = initialPositions[1];
+        const finalPos = finalPositions[1];
+      // Example: Disassembling a part by hiding it
+      const mv = document.querySelector("#orbit-demo");
+      const sceneSym = Object.getOwnPropertySymbols(mv).find(x => x.description === "scene");
+
+      console.log(mv[sceneSym].children[0].children[3].children[0].getObjectByName('motor_assembly_COMPLETE_6'));
+      console.log(mv[sceneSym].children[0].children[3].children[0].getObjectByName('motor_assembly_COMPLETE_6').animations);
+      // mv[sceneSym].children[0].children[3].children[0].getObjectByName('motor_assembly_COMPLETE_6').animations.set([{ [axis]: 0 }, { [axis]: 10 }]);
+      mv[sceneSym].children[0].children[3].children[0].getObjectByName('motor_assembly_COMPLETE_6').position.set(-400, 0, 0);
+      mv[sceneSym].children[0].children[3].children[0].getObjectByName('motor_assembly_COMPLETE_1').position.set(-200, 0, 0);
+      mv[sceneSym].children[0].children[3].children[0].getObjectByName('motor_assembly_COMPLETE_2').position.set(0, 0, 0);
+      mv[sceneSym].children[0].children[3].children[0].getObjectByName('motor_assembly_COMPLETE_3').position.set(200, 0, 0);
+      mv[sceneSym].children[0].children[3].children[0].getObjectByName('motor_assembly_COMPLETE_4').position.set(400, 0, 0);
+      mv[sceneSym].children[0].children[3].children[0].getObjectByName('motor_assembly_COMPLETE_5').position.set(600, 0, 0);
+    });
+
+
+    // Define the assembly and disassembly axis
+    const axis = 'y'; // Change this to 'x' or 'z' as needed
+
+    // Define the initial and final positions of the objects
+    const initialPositions = [
+      { x: 0, y: 0, z: 0 },
+      // Add more initial positions as needed
+    ];
+
+    const finalPositions = [
+      { x: 0, y: 10, z: 0 },
+      // Add more final positions as needed
+    ];
+
+    // Function to animate assembly effect
+    function assembleObjects() {
+      viewer.animationName = null; // Reset any ongoing animations
+
+      viewer.model.children.forEach((child, index) => {
+        const initialPos = initialPositions[index];
+        const finalPos = finalPositions[index];
+
+        // Animate object along the assembly axis
+        const animation = viewer.model.animate([{ [axis]: initialPos[axis] }, { [axis]: finalPos[axis] }], {
+          duration: 1000,
+          easing: 'ease-in-out',
+        });
+        animation.play();
+      });
+    }
+
+    // Function to animate disassembly effect
+    function disassembleObjects() {
+      const modelViewers = document.querySelector('#orbit-demo');
+
+      modelViewers.animationName = null; // Reset any ongoing animations
+
+      // modelViewers.model.children.forEach((child, index) => {
+      //   const initialPos = initialPositions[index];
+      //   const finalPos = finalPositions[index];
+
+      //   // Animate object along the assembly axis
+      //   const animation = modelViewers.model.animate([{ [axis]: finalPos[axis] }, { [axis]: initialPos[axis] }], {
+      //     duration: 1000,
+      //     easing: 'ease-in-out',
+      //   });
+      //   animation.play();
+      // });
+
+    }
+  </script>
+  <!-- Loads <model-viewer> for browsers: -->
+  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.0.1/model-viewer.min.js"></script>
+</body>
+
+</html>
